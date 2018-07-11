@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">SimpleDictionary</string>
+    <string name="your_word_here">Your word here</string>
+    <string name="results">Results</string>
+    <string name="search">Search</string>
+</resources>
