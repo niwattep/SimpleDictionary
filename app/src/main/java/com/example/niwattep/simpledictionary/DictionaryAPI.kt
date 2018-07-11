@@ -9,7 +9,9 @@ import retrofit2.http.Query
 
 interface DictionaryAPI {
     @GET("search/en")
-    fun getSearchResult(@Query("q") q: String): Call<WordListResult>
+    fun getSearchResult(@Query("q") q: String,
+                        @Query("limit") limit: Int = 20,
+                        @Query("offset") offset: Int = 0): Call<WordListResult>
 
     @GET("entries/en/{word_id}")
     fun getWord(@Path("word_id") id: String): Call<RetrieveEntry>
