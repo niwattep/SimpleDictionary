@@ -2,6 +2,7 @@ package com.example.niwattep.simpledictionary
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -28,7 +29,16 @@ class WordDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_detial)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        seeMoreButton.setOnClickListener {
+            openWebView()
+        }
         loadWordDetail()
+    }
+
+    private fun openWebView() {
+        val uri = Uri.parse("https://www.google.com/search?q=" + wordId)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
     }
 
     private fun loadWordDetail() {
@@ -49,12 +59,12 @@ class WordDetailActivity : AppCompatActivity() {
 
     fun fillResult(data: RetrieveEntry?) {
         data?.let {
-            it.results.forEach {
+            it.results?.forEach {
                 resultTextView.append(it.word + "\n\n")
                 it.lexicalEntries?.forEach {
                     resultTextView.append(it.lexicalCategory + "\n")
                     it.entries?.forEach {
-                        it.grammaticalFeatures.forEach {
+                        it.grammaticalFeatures?.forEach {
                             resultTextView.append(it.text + " ")
                         }
                         resultTextView.append("\n")
